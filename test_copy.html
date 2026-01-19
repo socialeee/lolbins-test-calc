@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTA Calculator PoC</title>
+    <hta:application
+        id="oMyApp"
+        applicationName="Calc Launcher"
+        border="thick"
+        borderStyle="dialog"
+        sysmenu="yes"
+        showInTaskbar="yes"
+        singleInstance="yes"
+        windowState="normal"
+    />
+    <style>
+        body { font-family: consolas, sans-serif; background-color: #1e1e1e; color: #d4d4d4; }
+        button { padding: 15px; background-color: #0e639c; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #1177bb; }
+    </style>
+    
+    <script language="JavaScript">
+        function spawnCalc() {
+            try {
+                // Instansiasi objek WScript.Shell
+                var shell = new ActiveXObject("WScript.Shell");
+                // Menjalankan calc.exe
+                shell.Run("calc.exe");
+            } catch (e) {
+                alert("Gagal menjalankan: " + e.message);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Proof of Concept</h1>
+    <p>Klik tombol di bawah untuk memanggil child process (calc.exe).</p>
+    
+    <button onclick="spawnCalc();">Spawn Calculator</button>
+</body>
+</html>
